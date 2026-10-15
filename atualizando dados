@@ -1,0 +1,90 @@
+create database update_aula
+default character SET utf8mb4
+collate utf8mb4_0900_ai_ci;
+use update_aula;
+
+-- criação da tabela de produtos
+create table if not exists produtos (
+    id int auto_increment primary key,
+    nome varchar(50),
+    categoria varchar(30),
+    preco decimal(10,2),
+    estoque int
+) default charset = utf8mb4;
+
+-- inserção de dados em produtos
+insert into produtos (nome, categoria, preco, estoque) values
+('teclado gamer', 'periféricos', 150.00, 20),
+('mouse óptico', 'periféricos', 50.00, 15),
+('monitor', 'monitores', 900.00, 8),
+('cadeira gamer', 'móveis', 1200.00, 5),
+('webcam hd', 'periféricos', 250.00, 12);
+
+-- criação da nova tabela: clientes
+create table if not exists clientes (
+    id int auto_increment primary key,
+    nome varchar(100),
+    email varchar(100),
+    cidade varchar(50)
+) default charset = utf8mb4;
+
+-- inserção de dados em clientes
+insert into clientes (nome, email, cidade) values
+('ana silva', 'ana.silva@email.com', 'são paulo'),
+('bruno souza', 'bruno.souza@email.com', 'rio de janeiro'),
+('carla costa', 'carla.costa@email.com', 'belo horizonte');
+
+select*from clientes;
+
+update clientes set nome = "Ana Silva Siqueira", cidade = "xiquexique" where id = 1;
+
+-- --------------------------------------------------------------
+
+-- 1. O preço do mouse optico subiu. Atualize o preço deste produto para R$ 65.00 na tabela produtos.
+UPDATE produtos
+SET preco = 65.00
+WHERE nome = 'mouse óptico';
+
+
+-- 2. Atualizar o estoque do monitor 24" para 15 unidades
+UPDATE produtos
+SET estoque = 15
+WHERE nome = 'monitor 24"';
+
+
+-- 3. Alterar a categoria periféricos para acessórios
+UPDATE produtos
+SET categoria = 'acessórios'
+WHERE categoria = 'periféricos';
+
+
+-- 4. Atualizar o e-mail da cliente Ana Silva
+UPDATE clientes
+SET email = 'ana nova@email.com'
+WHERE nome = 'ana silva';
+
+
+-- 5. Corrigir o nome do produto webcam HD
+UPDATE produtos
+SET nome = 'webcam full hd 1080p'
+WHERE nome = 'webcam hd';
+
+
+-- 6. Alterar a cidade da cliente Carla Costa para Curitiba
+UPDATE clientes
+SET cidade = 'curitiba'
+WHERE nome = 'carla costa';
+
+
+-- 7. Atualizar o preço e o estoque da cadeira gamer
+UPDATE produtos
+SET preco = 1350.00, estoque = 3
+WHERE nome = 'cadeira gamer';
+
+
+-- 8. Alterar a cidade de todos os clientes de São Paulo para Guarulhos
+UPDATE clientes
+SET cidade = 'guarulhos'
+WHERE cidade = 'são paulo';
+
+
